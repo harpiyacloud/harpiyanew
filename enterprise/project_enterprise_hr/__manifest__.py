@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+{
+    'name': "Project Enterprise HR",
+    'summary': """Bridge module for project_enterprise and hr""",
+    'description': """
+Bridge module for project_enterprise and hr
+    """,
+    'category': 'Services/Project',
+    'version': '1.0',
+    'depends': ['project_enterprise', 'hr'],
+    'auto_install': True,
+    'author': 'Harpiya Software Technologies, LLC',
+    'license': 'OEEL-1',
+}

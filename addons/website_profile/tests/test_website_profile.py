@@ -1,0 +1,17 @@
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+import harpiya.tests
+from harpiya.addons.gamification.tests.common import HttpCaseGamification
+
+
+@harpiya.tests.tagged('post_install', '-at_install')
+class TestWebsiteProfile(HttpCaseGamification):
+    def test_save_change_description(self):
+        harpiya.tests.new_test_user(
+            self.env, 'test_user',
+            karma=100, website_published=True
+        )
+        self.env.ref('base.user_admin').write({
+            'email': 'mitchell.admin@example.com',
+        })
+        self.start_tour("/", 'website_profile_description', login="admin")

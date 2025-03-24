@@ -1,0 +1,16 @@
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+from harpiya import fields, models
+
+
+class HrPayslipIsLogLine(models.Model):
+    _name = 'hr.payslip.is.log.line'
+    _description = 'IS Log lines'
+
+    is_code = fields.Char()
+    code = fields.Char()
+    amount = fields.Float()
+    payslip_id = fields.Many2one('hr.payslip')
+    is_correction = fields.Boolean()
+    corrected_slip_id = fields.Many2one('hr.payslip')
+    date = fields.Date()

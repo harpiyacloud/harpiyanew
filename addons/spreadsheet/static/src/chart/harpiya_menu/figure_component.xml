@@ -1,0 +1,16 @@
+<harpiya>
+    <div t-name="spreadsheet.FigureComponent" t-inherit="o-spreadsheet-FigureComponent" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o-figure-menu-item')]" position="before">
+            <div
+                t-if="hasHarpiyaMenu and !env.isDashboard()"
+                class="o-figure-menu-item o-chart-external-link"
+                t-custom-click="(ev, isMiddleClick) => this.navigateToHarpiyaMenu(isMiddleClick)">
+                <span class="fa fa-external-link" />
+            </div>
+        </xpath>
+        <xpath expr="//div[hasclass('o-figure')]" position="attributes">
+            <attribute name="t-custom-click">(ev, isMiddleClick) => this.onClick(isMiddleClick)</attribute>
+            <attribute name="t-att-role">env.isDashboard() and hasHarpiyaMenu ? "button" : ""</attribute>
+        </xpath>
+    </div>
+</harpiya>

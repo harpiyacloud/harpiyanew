@@ -1,0 +1,26 @@
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+{
+    'name': 'Website Generator',
+    'version': '1.0.0',
+    'category': 'Hidden/Tools',
+    'summary': 'Import a pre-existing website',
+    'description': """
+        Generates a new website in Harpiya, with the goal of recreating an external website as close as possible.
+    """,
+    'depends': ['website', 'website_enterprise'],
+    'data': [
+        'security/ir.model.access.csv',
+        'cron/cron.xml',
+        'views/website_generator_views.xml',
+        'data/mail_template.xml',
+    ],
+    'assets': {
+        'web.assets_backend': [
+            'website_generator/static/src/client_actions/*/*',
+            'website_generator/static/src/systray_items/*',
+        ],
+    },
+    'installable': True,
+    'author': 'Harpiya Software Technologies, LLC',
+    'license': 'OEEL-1',
+}

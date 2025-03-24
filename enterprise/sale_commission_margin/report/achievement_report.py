@@ -1,0 +1,14 @@
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+
+from harpiya import models
+
+
+class SaleCommissionAchievementReport(models.Model):
+    _inherit = "sale.commission.achievement.report"
+
+    def _get_sale_rates(self):
+        return super()._get_sale_rates() + ['margin']
+
+    def _get_sale_rates_product(self):
+        return super()._get_sale_rates_product() + "+ rules.margin_rate * COALESCE(sol.margin, 0) / sale_order.currency_rate"

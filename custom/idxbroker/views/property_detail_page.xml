@@ -1,0 +1,1135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<harpiya>
+  <template id="property_detail_page" name="IDX Professional Detail Page">
+    <t t-call="website.layout">
+      <t t-set="property" t-value="property" />
+      <t t-set="title" t-value="'Property: ' + property.get('address', 'Detail')" />
+
+      <!-- Full-width Image Carousel -->
+      <section class="property-carousel position-relative overflow-hidden" style="height:100vh;">
+        <div id="propertyCarousel" class="carousel slide carousel-fade h-100">
+          <div class="carousel-inner h-100">
+            <t t-foreach="property.get('filtered_images', [])" t-as="img">
+              <div t-attf-class="carousel-item h-100 #{'active' if img['priority'] == 1 else ''}">
+                <img t-att-src="img['url']"
+                  class="d-block w-100 h-100 object-fit-cover"
+                  t-att-alt="property.get('address', '')" />
+              </div>
+            </t>
+          </div>
+          <button class="carousel-control-prev" type="button"
+            data-bs-target="#propertyCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button"
+            data-bs-target="#propertyCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+        </div>
+      </section>
+
+      <!-- Main Property Details -->
+      <section class="property-details container-fluid py-5 px-5">
+        <div class="row">
+          <!-- Left Column -->
+          <div class="col-lg-8">
+            <h2 class="h3-fs"><t t-esc="property.get('address', 'Property')" /></h2>
+            <p class="lead"><t t-esc="property.get('listingPrice', '')" /></p>
+
+            <p>
+              <t t-if="property.get('remarksConcat')">
+                <t t-esc="property['remarksConcat']" />
+              </t>
+            </p>
+
+
+            <div class="accordion" id="propertyDetails">
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="propertyDetails-headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#propertyDetails-basicInfo" aria-expanded="true"
+                    aria-controls="propertyDetails-basicInfo">
+                    BASIC INFORMATION
+                  </button>
+                </h2>
+                <div id="propertyDetails-basicInfo" class="accordion-collapse collapse show"
+                  aria-labelledby="propertyDetails-headingOne">
+                  <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                      <t t-if="property.get('listingID')">
+                        <li class="list-group-item">
+                          <strong>Listing ID:</strong>
+                          <t
+                            t-esc="property['listingID']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('listingPrice')">
+                        <li class="list-group-item">
+                          <strong>Price:</strong>
+                          <t
+                            t-esc="property['listingPrice']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('pricePerSqFt')">
+                        <li class="list-group-item">
+                          <strong>Price/SqFt:</strong>
+                          <t
+                            t-esc="property['pricePerSqFt']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('propStatus')">
+                        <li class="list-group-item">
+                          <strong>Status:</strong>
+                          <t
+                            t-esc="property['propStatus']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('bedrooms')">
+                        <li class="list-group-item">
+                          <strong>Bedrooms:</strong>
+                          <t
+                            t-esc="property['bedrooms']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('totalBaths')">
+                        <li class="list-group-item">
+                          <strong>Total Baths:</strong>
+                          <t
+                            t-esc="property['totalBaths']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('fullBaths')">
+                        <li class="list-group-item">
+                          <strong>Full Baths:</strong>
+                          <t
+                            t-esc="property['fullBaths']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('partialBaths')">
+                        <li class="list-group-item">
+                          <strong>Partial Baths:</strong>
+                          <t
+                            t-esc="property['partialBaths']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('sqFt')">
+                        <li class="list-group-item">
+                          <strong>SqFt:</strong>
+                          <t
+                            t-esc="property['sqFt']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('acres')">
+                        <li class="list-group-item">
+                          <strong>Acres:</strong>
+                          <t
+                            t-esc="property['acres']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('countyName')">
+                        <li class="list-group-item">
+                          <strong>County:</strong>
+                          <t
+                            t-esc="property['countyName']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('subdivision')">
+                        <li class="list-group-item">
+                          <strong>Subdivision:</strong>
+                          <t
+                            t-esc="property['subdivision']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('yearBuilt')">
+                        <li class="list-group-item">
+                          <strong>Year Built:</strong>
+                          <t
+                            t-esc="property['yearBuilt']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('propSubType')">
+                        <li class="list-group-item">
+                          <strong>Property Sub Type:</strong>
+                          <t
+                            t-esc="property['propSubType']" />
+                        </li>
+                      </t>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="propertyDetails-headingTwo">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#propertyDetails-school" aria-expanded="false"
+                    aria-controls="propertyDetails-school">
+                    SCHOOLS
+                  </button>
+                </h2>
+                <div id="propertyDetails-school" class="accordion-collapse collapse show"
+                  aria-labelledby="propertyDetails-headingTwo">
+                  <div class="accordion-body">
+                    <div id="gsWidget"
+                      t-att-data-cityname="property.get('cityName', '')"
+                      t-att-data-state="property.get('state', '')"
+                      t-att-data-zipcode="property.get('zipcode', '')"
+                      t-att-data-latitude="property.get('latitude', '')"
+                      t-att-data-longitude="property.get('longitude', '')"
+                      style="width:100%; margin-top: 2rem;">
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="propertyDetails-headingThree">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#propertyDetails-primaryFeatures" aria-expanded="false"
+                    aria-controls="propertyDetails-primaryFeatures">
+                    PRIMARY FEATURES
+                  </button>
+                </h2>
+                <div id="propertyDetails-primaryFeatures" class="accordion-collapse collapse show"
+                  aria-labelledby="propertyDetails-headingThree">
+                  <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                      <t t-if="property.get('countyName')">
+                        <li class="list-group-item">
+                          <strong>County:</strong>
+                          <t
+                            t-esc="property['countyName']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('partialBaths')">
+                        <li class="list-group-item">
+                          <strong>Half Baths:</strong>
+                          <t
+                            t-esc="property['partialBaths']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('pricePerSqFt')">
+                        <li class="list-group-item">
+                          <strong>Price/SqFt:</strong>
+                          <t
+                            t-esc="property['pricePerSqFt']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('propSubType')">
+                        <li class="list-group-item">
+                          <strong>Property Sub Type:</strong>
+                          <t
+                            t-esc="property['propSubType']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('subdivision')">
+                        <li class="list-group-item">
+                          <strong>Subdivision:</strong>
+                          <t
+                            t-esc="property['subdivision']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('yearBuilt')">
+                        <li class="list-group-item">
+                          <strong>Year Built:</strong>
+                          <t
+                            t-esc="property['yearBuilt']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('zoning')">
+                        <li class="list-group-item">
+                          <strong>Zoning:</strong>
+                          <t
+                            t-esc="property['zoning']" />
+                        </li>
+                      </t>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="propertyDetails-headingFour">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#propertyDetails-interior" aria-expanded="false"
+                    aria-controls="propertyDetails-interior">
+                    INTERIOR
+                  </button>
+                </h2>
+                <div id="propertyDetails-interior" class="accordion-collapse collapse show"
+                  aria-labelledby="propertyDetails-headingFour">
+                  <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                      <t t-if="property.get('belowGradeUnfinAreaUnits')">
+                        <li class="list-group-item">
+                          <strong>Above Grade Finished Area Units:</strong>
+                          <t
+                            t-esc="property['belowGradeUnfinAreaUnits']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('belowGradeFinSqftSource')">
+                        <li class="list-group-item">
+                          <strong>Above Grade Finished SqFt Source:</strong>
+                          <t
+                            t-esc="property['belowGradeFinSqftSource']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('appliances')">
+                        <li class="list-group-item">
+                          <strong>Appliances:</strong>
+                          <t t-esc="', '.join(property.get('appliances', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('basementYN')">
+                        <li class="list-group-item">
+                          <strong>Basement:</strong>
+                          <t
+                            t-esc="property['basementYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('basementType')">
+                        <li class="list-group-item">
+                          <strong>Basement Type:</strong>
+                          <t t-esc="', '.join(property.get('basementType', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('bathroomsCountLowerLevel1')">
+                        <li class="list-group-item">
+                          <strong>Bathrooms Count Lower Level 1:</strong>
+                          <t
+                            t-esc="property['bathroomsCountLowerLevel1']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('bathroomsCountMainLevel')">
+                        <li class="list-group-item">
+                          <strong>Bathrooms Count Main Level:</strong>
+                          <t
+                            t-esc="property['bathroomsCountMainLevel']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('bathroomsCountUpperLevel1')">
+                        <li class="list-group-item">
+                          <strong>Bathrooms Count Upper Level 1:</strong>
+                          <t
+                            t-esc="property['bathroomsCountUpperLevel1']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('bathroomsFullLowerLevel1')">
+                        <li class="list-group-item">
+                          <strong>Bathrooms Full Lower Level 1:</strong>
+                          <t
+                            t-esc="property['bathroomsFullLowerLevel1']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('bathroomsFullUpperLevel1')">
+                        <li class="list-group-item">
+                          <strong>Bathrooms Full Upper Level 1:</strong>
+                          <t
+                            t-esc="property['bathroomsFullUpperLevel1']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('bathroomsHalfMainLevel')">
+                        <li class="list-group-item">
+                          <strong>Bathrooms Half Main Level:</strong>
+                          <t
+                            t-esc="property['bathroomsHalfMainLevel']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('bedroomsCountUpperLevel1')">
+                        <li class="list-group-item">
+                          <strong>Bedrooms Count Upper Level:</strong>
+                          <t
+                            t-esc="property['bedroomsCountUpperLevel1']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('aboveGradeFinishedAreaUnits')">
+                        <li class="list-group-item">
+                          <strong>Below Grade Finished Area Units:</strong>
+                          <t
+                            t-esc="property['aboveGradeFinishedAreaUnits']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('belowGradeFinSqft')">
+                        <li class="list-group-item">
+                          <strong>Below Grade Finished SqFt:</strong>
+                          <t
+                            t-esc="property['belowGradeFinSqft']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('livingAreaSqftSource')">
+                        <li class="list-group-item">
+                          <strong>Below Grade Finished SqFt Source</strong>
+                          <t
+                            t-esc="property['livingAreaSqftSource']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('belowGradeUnfinAreaUnits')">
+                        <li class="list-group-item">
+                          <strong>Below Grade Unfinished Area Units:</strong>
+                          <t
+                            t-esc="property['belowGradeUnfinAreaUnits']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('belowGradeUnfinSqftSource')">
+                        <li class="list-group-item">
+                          <strong>Below Grade Unfinished SqFt Source:</strong>
+                          <t
+                            t-esc="property['belowGradeUnfinSqftSource']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('centralAirYN')">
+                        <li class="list-group-item">
+                          <strong>Central Air:</strong>
+                          <t
+                            t-esc="property['centralAirYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('coolingType')">
+                        <li class="list-group-item">
+                          <strong>Cooling Type:</strong>
+                          <t t-esc="', '.join(property.get('coolingType', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('fireplaceYN')">
+                        <li class="list-group-item">
+                          <strong>Fireplace:</strong>
+                          <t
+                            t-esc="property['fireplaceYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('fireplaceFeatures')">
+                        <li class="list-group-item">
+                          <strong>Fireplace Features:</strong>
+                          <t t-esc="', '.join(property.get('fireplaceFeatures', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('fireplacesCount')">
+                        <li class="list-group-item">
+                          <strong>Fireplaces Count:</strong>
+                          <t
+                            t-esc="property['fireplacesCount']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('flooringType')">
+                        <li class="list-group-item">
+                          <strong>Flooring Type:</strong>
+                          <t t-esc="', '.join(property.get('flooringType', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('heatingYN')">
+                        <li class="list-group-item">
+                          <strong>Heating:</strong>
+                          <t
+                            t-esc="property['heatingYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('heatingType')">
+                        <li class="list-group-item">
+                          <strong>Heating Type:</strong>
+                          <t t-esc="', '.join(property.get('heatingType', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('laundryType')">
+                        <li class="list-group-item">
+                          <strong>Laundry Type:</strong>
+                          <t t-esc="', '.join(property.get('laundryType', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('levelsCount')">
+                        <li class="list-group-item">
+                          <strong>Levels Count:</strong>
+                          <t t-esc="', '.join(property.get('levelsCount', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('livingAreaSqftSource')">
+                        <li class="list-group-item">
+                          <strong>Living Area SqFt Source:</strong>
+                          <t
+                            t-esc="property['livingAreaSqftSource']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('roomCount')">
+                        <li class="list-group-item">
+                          <strong>Room Count:</strong>
+                          <t
+                            t-esc="property['roomCount']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('roomList')">
+                        <li class="list-group-item">
+                          <strong>Room List:</strong>
+                          <t t-esc="', '.join(property.get('roomList', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('totalBelowGradeSqft')">
+                        <li class="list-group-item">
+                          <strong>Total Below Grade SqFt:</strong>
+                          <t
+                            t-esc="property['totalBelowGradeSqft']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('totalBelowGradeSqftSource')">
+                        <li class="list-group-item">
+                          <strong>Total Below Grade SqFt Source:</strong>
+                          <t t-esc="', '.join(property.get('totalBelowGradeSqftSource', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('totalSqft')">
+                        <li class="list-group-item">
+                          <strong>Total SqFt:</strong>
+                          <t
+                            t-esc="property['totalSqft']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('totalSqftSource')">
+                        <li class="list-group-item">
+                          <strong>Total SqFt Source:</strong>
+                          <t t-esc="', '.join(property.get('totalSqftSource', []))" />
+                        </li>
+                      </t>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="propertyDetails-headingFive">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#propertyDetails-external" aria-expanded="false"
+                    aria-controls="propertyDetails-external">
+                    EXTERNAL
+                  </button>
+                </h2>
+                <div id="propertyDetails-external" class="accordion-collapse collapse show"
+                  aria-labelledby="propertyDetails-headingFive">
+                  <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                      <t t-if="property.get('architecturalStyle')">
+                        <li class="list-group-item">
+                          <strong>Architectural Style:</strong>
+                          <t t-esc="', '.join(property.get('architecturalStyle', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('constructionMaterials')">
+                        <li class="list-group-item">
+                          <strong>Construction Materials:</strong>
+                          <t t-esc="', '.join(property.get('constructionMaterials', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('coolingFuel')">
+                        <li class="list-group-item">
+                          <strong>Cooling Fuel:</strong>
+                          <t t-esc="', '.join(property.get('coolingFuel', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('exteriorFeatures')">
+                        <li class="list-group-item">
+                          <strong>Exterior Features:</strong>
+                          <t t-esc="', '.join(property.get('exteriorFeatures', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('foundationDetails')">
+                        <li class="list-group-item">
+                          <strong>Foundation Details:</strong>
+                          <t t-esc="', '.join(property.get('foundationDetails', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('garageYN')">
+                        <li class="list-group-item">
+                          <strong>Garage:</strong>
+                          <t
+                            t-esc="property['garageYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('garageFeatures')">
+                        <li class="list-group-item">
+                          <strong>Garage Features:</strong>
+                          <t t-esc="', '.join(property.get('garageFeatures', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('garageSpacesCount')">
+                        <li class="list-group-item">
+                          <strong>Garage Spaces Count:</strong>
+                          <t
+                            t-esc="property['garageSpacesCount']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('heatingFuel')">
+                        <li class="list-group-item">
+                          <strong>Heating Fuel:</strong>
+                          <t t-esc="', '.join(property.get('heatingFuel', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('hotWater')">
+                        <li class="list-group-item">
+                          <strong>Hot Water:</strong>
+                          <t t-esc="', '.join(property.get('hotWater', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('lotSizeSource')">
+                        <li class="list-group-item">
+                          <strong>Lot Size Source:</strong>
+                          <t
+                            t-esc="property['lotSizeSource']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('lotSizeUnits')">
+                        <li class="list-group-item">
+                          <strong>Lot Size Units:</strong>
+                          <t
+                            t-esc="property['lotSizeUnits']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('lotSqft')">
+                        <li class="list-group-item">
+                          <strong>Lot SqFt:</strong>
+                          <t
+                            t-esc="property['lotSqft']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('navigableWaterYN')">
+                        <li class="list-group-item">
+                          <strong>Navigable Water:</strong>
+                          <t
+                            t-esc="property['navigableWaterYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('newConstructionYN')">
+                        <li class="list-group-item">
+                          <strong>New Construction:</strong>
+                          <t
+                            t-esc="property['newConstructionYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('numOfAttachedGarageSpaces')">
+                        <li class="list-group-item">
+                          <strong>Number of Attached Garage Spaces:</strong>
+                          <t
+                            t-esc="property['numOfAttachedGarageSpaces']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('otherStructures')">
+                        <li class="list-group-item">
+                          <strong>Other Structures:</strong>
+                          <t t-esc="', '.join(property.get('otherStructures', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('outdoorLivingStructures')">
+                        <li class="list-group-item">
+                          <strong>Outdoor Living Structures:</strong>
+                          <t t-esc="', '.join(property.get('outdoorLivingStructures', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('parkingFeatures')">
+                        <li class="list-group-item">
+                          <strong>Parking Features:</strong>
+                          <t t-esc="', '.join(property.get('parkingFeatures', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('pool')">
+                        <li class="list-group-item">
+                          <strong>Pool:</strong>
+                          <t t-esc="', '.join(property.get('pool', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('sewerSeptic')">
+                        <li class="list-group-item">
+                          <strong>Sewer Septic:</strong>
+                          <t t-esc="', '.join(property.get('sewerSeptic', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('tidalWaterYN')">
+                        <li class="list-group-item">
+                          <strong>Tidal Water:</strong>
+                          <t
+                            t-esc="property['tidalWaterYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('totalGarageAndParkingSpaces')">
+                        <li class="list-group-item">
+                          <strong>Total Garage and Parking Spaces:</strong>
+                          <t
+                            t-esc="property['totalGarageAndParkingSpaces']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('typeOfParking')">
+                        <li class="list-group-item">
+                          <strong>Type of Parking:</strong>
+                          <t t-esc="', '.join(property.get('typeOfParking', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('waterAccessYN')">
+                        <li class="list-group-item">
+                          <strong>Water Access:</strong>
+                          <t
+                            t-esc="property['waterAccessYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('waterOrientedYN')">
+                        <li class="list-group-item">
+                          <strong>Water Oriented:</strong>
+                          <t
+                            t-esc="property['waterOrientedYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('waterSource')">
+                        <li class="list-group-item">
+                          <strong>Water Source:</strong>
+                          <t t-esc="', '.join(property.get('waterSource', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('waterViewYN')">
+                        <li class="list-group-item">
+                          <strong>Water View:</strong>
+                          <t
+                            t-esc="property['waterViewYN']" />
+                        </li>
+                      </t>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="propertyDetails-headingSix">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#propertyDetails-location" aria-expanded="false"
+                    aria-controls="propertyDetails-location">
+                    LOCATION
+                  </button>
+                </h2>
+                <div id="propertyDetails-location" class="accordion-collapse collapse show"
+                  aria-labelledby="propertyDetails-headingSix">
+                  <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                      <t t-if="property.get('condoCoopAssociationYN')">
+                        <li class="list-group-item">
+                          <strong>Condo/Co-op Association:</strong>
+                          <t
+                            t-esc="property['condoCoopAssociationYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('country')">
+                        <li class="list-group-item">
+                          <strong>Country:</strong>
+                          <t
+                            t-esc="property['country']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('elementarySchool')">
+                        <li class="list-group-item">
+                          <strong>Elementary School:</strong>
+                          <t
+                            t-esc="property['elementarySchool']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('elementarySchoolSource')">
+                        <li class="list-group-item">
+                          <strong>Elementary School Source:</strong>
+                          <t
+                            t-esc="property['elementarySchoolSource']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('highSchool')">
+                        <li class="list-group-item">
+                          <strong>High School:</strong>
+                          <t
+                            t-esc="property['highSchool']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('hoaYN')">
+                        <li class="list-group-item">
+                          <strong>HOA:</strong>
+                          <t
+                            t-esc="property['hoaYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('hoaName')">
+                        <li class="list-group-item">
+                          <strong>HOA Name:</strong>
+                          <t
+                            t-esc="property['hoaName']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('inCityLimitsYN')">
+                        <li class="list-group-item">
+                          <strong>In City Limits:</strong>
+                          <t
+                            t-esc="property['inCityLimitsYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('middleOrJuniorSchool')">
+                        <li class="list-group-item">
+                          <strong>Middle Or Junior School:</strong>
+                          <t
+                            t-esc="property['middleOrJuniorSchool']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('middleSchoolSource')">
+                        <li class="list-group-item">
+                          <strong>Middle School Source:</strong>
+                          <t
+                            t-esc="property['middleSchoolSource']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('schoolDistrictName')">
+                        <li class="list-group-item">
+                          <strong>School District Name:</strong>
+                          <t
+                            t-esc="property['schoolDistrictName']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('schoolDistrictSource')">
+                        <li class="list-group-item">
+                          <strong>School District Source:</strong>
+                          <t
+                            t-esc="property['schoolDistrictSource']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('seniorCommunityYN')">
+                        <li class="list-group-item">
+                          <strong>Senior Community:</strong>
+                          <t
+                            t-esc="property['seniorCommunityYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('waterfrontYN')">
+                        <li class="list-group-item">
+                          <strong>Waterfront:</strong>
+                          <t
+                            t-esc="property['waterfrontYN']" />
+                        </li>
+                      </t>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="propertyDetails-headingSeven">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#propertyDetails-additional" aria-expanded="false"
+                    aria-controls="propertyDetails-additional">
+                    ADDITIONAL
+                  </button>
+                </h2>
+                <div id="propertyDetails-additional" class="accordion-collapse collapse show"
+                  aria-labelledby="propertyDetails-headingSeven">
+                  <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                      <t t-if="property.get('accessibilityFeatures')">
+                        <li class="list-group-item">
+                          <strong>Accessibility Features:</strong>
+                          <t t-esc="', '.join(property.get('accessibilityFeatures', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('propertyCondition')">
+                        <li class="list-group-item">
+                          <strong>Property Condition:</strong>
+                          <t t-esc="', '.join(property.get('propertyCondition', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('propertyManagerYN')">
+                        <li class="list-group-item">
+                          <strong>Property Manager:</strong>
+                          <t
+                            t-esc="property['propertyManagerYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('storyList')">
+                        <li class="list-group-item">
+                          <strong>Story List:</strong>
+                          <t t-esc="', '.join(property.get('storyList', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('yearAssessed')">
+                        <li class="list-group-item">
+                          <strong>Year Assessed:</strong>
+                          <t
+                            t-esc="property['yearAssessed']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('yearBuiltSource')">
+                        <li class="list-group-item">
+                          <strong>Year Built Source:</strong>
+                          <t
+                            t-esc="property['yearBuiltSource']" />
+                        </li>
+                      </t>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="propertyDetails-headingFinancal">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#propertyDetails-financal" aria-expanded="false"
+                    aria-controls="propertyDetails-financal">
+                    FINANCAL
+                  </button>
+                </h2>
+                <div id="propertyDetails-financal" class="accordion-collapse collapse show"
+                  aria-labelledby="propertyDetails-headingFinancal">
+                  <div class="accordion-body">
+                    <ul class="list-group list-group-flush">
+                      <t t-if="property.get('automaticallyUpdateTaxValuesYN')">
+                        <li class="list-group-item">
+                          <strong>Automatically Update Tax Values:</strong>
+                          <t
+                            t-esc="property['automaticallyUpdateTaxValuesYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('hoaFee')">
+                        <li class="list-group-item">
+                          <strong>HOA Fee:</strong>
+                          <t
+                            t-esc="property['hoaFee']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('hoaFeeFreq')">
+                        <li class="list-group-item">
+                          <strong>HOA Fee Frequency:</strong>
+                          <t
+                            t-esc="property['hoaFeeFreq']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('hoaCondoCoopFeeIncludes')">
+                        <li class="list-group-item">
+                          <strong>HOA/Condo/Co-op Fee Includes:</strong>
+                          <t t-esc="', '.join(property.get('hoaCondoCoopFeeIncludes', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('ownershipInterest')">
+                        <li class="list-group-item">
+                          <strong>Ownership Interest:</strong>
+                          <t
+                            t-esc="property['ownershipInterest']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('possession')">
+                        <li class="list-group-item">
+                          <strong>Possession:</strong>
+                          <t t-esc="', '.join(property.get('possession', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('riparianRightsYN')">
+                        <li class="list-group-item">
+                          <strong>Riparian Rights:</strong>
+                          <t
+                            t-esc="property['riparianRightsYN']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('saleType')">
+                        <li class="list-group-item">
+                          <strong>Sale Type:</strong>
+                          <t t-esc="', '.join(property.get('saleType', []))" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('taxAnnualAmount')">
+                        <li class="list-group-item">
+                          <strong>Tax Annual Amount:</strong>
+                          <t
+                            t-esc="property['taxAnnualAmount']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('taxAssessedValue')">
+                        <li class="list-group-item">
+                          <strong>Tax Assessed Value:</strong>
+                          <t
+                            t-esc="property['taxAssessedValue']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('taxTotalFinishedSqft')">
+                        <li class="list-group-item">
+                          <strong>Tax Total Finished SqFt:</strong>
+                          <t
+                            t-esc="property['taxTotalFinishedSqft']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('taxYear')">
+                        <li class="list-group-item">
+                          <strong>Tax Year:</strong>
+                          <t
+                            t-esc="property['taxYear']" />
+                        </li>
+                      </t>
+                      <t t-if="property.get('vacationRentalYN')">
+                        <li class="list-group-item">
+                          <strong>Vacation Rental:</strong>
+                          <t
+                            t-esc="property['vacationRentalYN']" />
+                        </li>
+                      </t>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="accordion-item">
+                <h2 class="accordion-header" id="propertyDetails-headingWalk">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#propertyDetails-walkScore" aria-expanded="false"
+                    aria-controls="propertyDetails-walkScore">
+                    WALK SCORE
+                  </button>
+                </h2>
+                <div id="propertyDetails-walkScore" class="accordion-collapse collapse show"
+                  aria-labelledby="propertyDetails-headingWalk">
+                  <div class="accordion-body">
+                    <div id="ws-walkscore-tile"
+                      t-att-data-address="property.get('address', '') + ', ' + property.get('cityName', '') + ', ' + property.get('state', '')"
+                      t-att-data-zipcode="property.get('zipcode', '')"
+                      t-att-data-lat="property.get('latitude', '')"
+                      t-att-data-lon="property.get('longitude', '')">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column (Contact Form) -->
+          <div class="col-lg-4">
+            <div class="sticky-top">
+              <t t-if="agent">
+                <div class="s_card card o_cc o_cc1 h-100 mb-4 p-3 shadow-sm">
+                  <h5><strong>Contact Agent</strong></h5>
+                  <p>
+                    <strong>Name:</strong>
+                    <t t-esc="agent.get('agentDisplayName')" />
+                  </p>
+                  <p>
+                    <strong>Country:</strong>
+                    <t t-esc="agent.get('country')" />
+                  </p>
+                  <p>
+                    <strong>Phone:</strong>
+                    <t t-esc="agent.get('agentOfficePhone')" />
+                  </p>
+                  <p>
+                    <strong>Email:</strong>
+                    <a t-if="agent.get('agentEmail')"
+                      t-att-href="'mailto:' + agent.get('agentEmail')">
+                      <t t-esc="agent.get('agentEmail')" />
+                    </a>
+                  </p>
+                </div>
+              </t>
+              <div class="s_card card o_cc o_cc1 h-100 shadow-sm">
+                <div class="card-header bg-primary text-white">
+                  <strong>Contact for Details</strong>
+                </div>
+                <div class="card-body">
+                  <form action="#" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()" />
+                    <input type="hidden" name="subject"
+                      t-att-value="'Inquiry for ' + property.get('address', 'Property')" />
+                    <div class="mb-3">
+                      <input type="text" class="form-control" name="name" placeholder="Your Name"
+                        required="true" />
+                    </div>
+                    <div class="mb-3">
+                      <input type="email" class="form-control" name="email_from" placeholder="Email"
+                        required="true" />
+                    </div>
+                    <div class="mb-3">
+                      <input type="text" class="form-control" name="phone" placeholder="Phone" />
+                    </div>
+                    <div class="mb-3">
+                      <textarea class="form-control" name="description" rows="3">I'm interested in this property.</textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Send Inquiry</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Walk Score JS Integration -->
+
+      <script type="text/javascript">
+        document.addEventListener("DOMContentLoaded", function () {
+        const container = document.getElementById('ws-walkscore-tile');
+        if (!container) return;
+
+        const ws_wsid = 'gde15fdb81d974ecf93764f6d0a93d8e8'; // senin WSID
+        const address = container.dataset.address || '';
+        const zipcode = container.dataset.zipcode || '';
+        const lat = container.dataset.lat || '';
+        const lon = container.dataset.lon || '';
+        const ws_address = `${address} ${zipcode}`.trim();
+        const ws_format = 'tall';
+        const ws_width = '100%';
+        const ws_height = '500';
+
+        const style = document.createElement('style');
+        style.type = 'text/css';
+        style.textContent = `
+        #ws-walkscore-tile { position:relative; text-align:left; }
+        #ws-walkscore-tile * { float:none; }
+        `;
+        document.head.appendChild(style);
+
+        const scriptVars = document.createElement('script');
+        scriptVars.type = 'text/javascript';
+        scriptVars.text = `
+        var ws_wsid = '${ws_wsid}';
+        var ws_address = '${ws_address}';
+        var ws_lat = '${lat}';
+        var ws_lon = '${lon}';
+        var ws_format = '${ws_format}';
+        var ws_width = '${ws_width}';
+        var ws_height = '${ws_height}';
+        `;
+        document.body.appendChild(scriptVars);
+
+        const scriptSrc = document.createElement('script');
+        scriptSrc.type = 'text/javascript';
+        scriptSrc.src = 'https://www.walkscore.com/tile/show-walkscore-tile.php';
+        document.body.appendChild(scriptSrc);
+        });
+</script>
+
+
+      <script type="text/javascript">
+        // <![CDATA[
+    document.addEventListener("DOMContentLoaded", function () {
+        var container = document.getElementById('gsWidget');
+        if (!container) return;
+
+        var options = {
+            cityName: encodeURIComponent(container.dataset.cityname || ''),
+            state: container.dataset.state || '',
+            zipcode: container.dataset.zipcode || '',
+            lat: container.dataset.latitude || '',
+            lon: container.dataset.longitude || '',
+            width: container.offsetWidth,
+            height: Math.max(434, Math.min(600, Math.round(container.offsetWidth / 1.78))),
+            textColor: '0066B8',
+            bordersColor: 'ffcc66',
+            zoom: 12
+        };
+
+        var iframeSrc = window.location.protocol + '//www.greatschools.org/widget/map?searchQuery=' + options.zipcode;
+
+        var queryParams = Object.keys(options)
+            .filter(function(key) { return key !== 'zipcode'; })
+            .map(function(key) { return key + '=' + options[key]; })
+            .join('&');
+
+        iframeSrc += '&' + queryParams;
+
+        var iframe = document.createElement('iframe');
+        iframe.className = 'greatschools';
+        iframe.src = iframeSrc;
+        iframe.width = options.width;
+        iframe.height = options.height;
+        iframe.marginHeight = 0;
+        iframe.marginWidth = 0;
+        iframe.scrolling = 'no';
+        iframe.frameBorder = 0;
+
+        container.innerHTML = '';
+        container.appendChild(iframe);
+    });
+// ]]>
+</script>
+    </t>
+  </template>
+</harpiya>

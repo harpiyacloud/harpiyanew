@@ -1,0 +1,16 @@
+# -*- coding: utf-8 -*-
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+{
+    'name': "CRM in marketing automation",
+    'version': "1.0",
+    'summary': "CRM in marketing automation",
+    'category': "CRM in marketing automation",
+    'depends': [
+        'marketing_automation',
+        'crm'
+    ],
+    'auto_install': True,
+    'author': 'Harpiya Software Technologies, LLC',
+    'license': 'OEEL-1',
+}

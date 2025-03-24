@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<harpiya>
+    <template id="hr_payroll_note_demo_content">
+        <p>Welcome on the payroll dashboard,</p>
+        <p>From this screen you'll have an overview of the essential stuff happening in your payroll.</p>
+        <p>Warnings will direct you to faulty records, you can choose to add new one from <a t-att-href="warning_url">Here</a></p>
+        <p>Batches contains the payslips and their states</p>
+        <p>Employer cost will show you the trend of your global amount to pay for your workforce every month</p>
+        <p>Employer Trends will show you, based on running contracts, your headcount</p>
+        <p>And in this block? Notes! You can create as many as you want to keep track of all important stuff.</p>
+    </template>
+</harpiya>

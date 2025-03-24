@@ -1,0 +1,21 @@
+# coding: utf-8
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+{
+    'name': 'Brazil - Sale',
+    'version': '1.0',
+    'description': 'Sale modifications for Brazil',
+    'category': 'Localization',
+    'depends': [
+        'l10n_br',
+        'sale',
+    ],
+    'data': [
+        'views/sale_portal_templates.xml',
+        'report/sale_order_templates.xml',
+        'report/report_invoice_templates.xml',
+    ],
+    'installable': True,
+    'auto_install': True,
+    'author': 'Harpiya Software Technologies, LLC',
+    'license': 'LGPL-3',
+}

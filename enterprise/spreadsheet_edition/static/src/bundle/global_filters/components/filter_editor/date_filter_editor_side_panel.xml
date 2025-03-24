@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates>
+
+    <div t-name="spreadsheet_edition.DateFilterEditorSidePanel" class="o_spreadsheet_filter_editor_side_panel">
+        <Section title.translate="Label">
+            <TextInput
+                placeholder="store.labelPlaceholder"
+                class="'o_global_filter_label' + (store.missingLabelError ? ' o_field_invalid' : '')"
+                value="store.filter.label"
+                onChange.bind="setLabel"
+                autofocus="true"
+            />
+        </Section>
+        <div class="o-section">
+            <div class="o-section-title">Time range</div>
+            <Select
+                class="'o-filter-range-type'"
+                value="store.filter.rangeType"
+                options="store.availableRangeTypes"
+                onOptionSelected.bind="onRangeTypeSelected"
+            />
+        </div>
+        <Section t-if="store.filter.rangeType !== 'from_to'" title.translate="Default value">
+            <t t-if="store.filter.rangeType !== 'relative'" class="d-flex align-items-center mt-2">
+                <Checkbox
+                    name="'date_automatic_filter'"
+                    label.translate="Automatically filter on the current period"
+                    value="!!store.filter.defaultValue"
+                    onChange.bind="store.toggleDateDefaultValue"
+                    className="'me-2'"
+                />
+            </t>
+            <Select
+                t-else="1"
+                class="'o_relative_date_selection'"
+                value="store.evaluatedDefaultValue || ''"
+                options="store.relativeOptions"
+                onOptionSelected.bind="updateDefaultValue"
+            />
+            <div class="pt-3" t-if="store.filter.defaultValue and store.filter.rangeType !== 'relative'">
+                <Select
+                    class="'date_filter_automatic_value'"
+                    value="store.evaluatedDefaultValue || ''"
+                    options="store.fixedPeriodOptions"
+                    onOptionSelected.bind="updateDefaultValue"
+                />
+            </div>
+        </Section>
+        <Section t-if="store.filter.rangeType === 'fixedPeriod'" title.translate="Value Options">
+            <div class="d-flex gap-3">
+                <Checkbox
+                    name="'month'"
+                    label.translate="Months"
+                    value="!store.filter.disabledPeriods?.includes('month')"
+                    onChange="() => this.store.toggleAllowedPeriod('month')"
+                />
+                <Checkbox
+                    name="'quarter'"
+                    label.translate="Quarters"
+                    value="!store.filter.disabledPeriods?.includes('quarter')"
+                    onChange="() => this.store.toggleAllowedPeriod('quarter')"
+                />
+            </div>
+        </Section>
+        <t t-if="store.shouldDisplayFieldMatching">
+            <SidePanelCollapsible collapsedAtInit="!store.isNew" title.translate="Field matching">
+                <t t-set-slot="content">
+                    <Section class="'pt-0'">
+                        <FilterEditorFieldMatching
+                            fieldMatchings="store.fieldsMatching"
+                            selectField.bind="onSelectedField"
+                            filterModelFieldSelectorField.bind="filterModelFieldSelectorField"
+                            onOffsetSelected.bind="onOffsetSelected"
+                        />
+                    </Section>
+                </t>
+            </SidePanelCollapsible>
+        </t>
+        <div class="o-section o-sidePanelButtons">
+            <t t-call="spreadsheet_edition.FilterEditorButtons">
+                <t t-set="onDelete" t-value="this.props.id and onDelete.bind(this)" />
+                <t t-set="onSave" t-value="onSave.bind(this)" />
+                <t t-set="onCancel" t-value="onCancel.bind(this)" />
+            </t>
+        </div>
+    </div>
+</templates>

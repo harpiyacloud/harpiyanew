@@ -1,0 +1,15 @@
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+{
+    'name': "Sales - Async Emails",
+    'category': 'Sales/Sales',
+    'summary': "Send order status emails asynchronously",
+    'depends': ['sale'],
+    'data': [
+        'data/ir_config_parameter.xml',
+        'data/ir_cron.xml',
+    ],
+    'auto_install': True,
+    'author': 'Harpiya Software Technologies, LLC',
+    'license': 'LGPL-3',
+}

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<harpiya>
+    <template id="s_dynamic_snippet_estate" name="IDX Broker İlanları">
+        <section
+            class="s_dynamic_snippet_estate s_three_columns o_cc o_colored_level o_cc1 pt64 pb64">
+            <div class="container">
+                <div class="row d-flex align-items-stretch">
+                    <div class="col-lg-12 mb-4">
+                        <h2 class="h3-fs">Discover our latest properties</h2>
+                        <p class="lead">Carefully handpicked by our experts</p>
+                    </div>
+                    <div id="idx-properties-container" class="row">
+
+                    </div>
+                </div>
+            </div>
+        </section>
+    </template>
+
+    <template id="s_dynamic_snippet_estate_options" inherit_id="website.snippet_options">
+        <xpath expr="." position="inside">
+            <t t-call="idxbroker.s_dynamic_snippet_options_template">
+                <t t-set="snippet_name" t-value="'dynamic_snippet_estate'" />
+                <t t-set="snippet_selector" t-value="'.s_dynamic_snippet_estate'" />
+            </t>
+        </xpath>
+    </template>
+
+    <template id="s_dynamic_snippet_options_template"
+        inherit_id="website.s_dynamic_snippet_options_template">
+        <xpath expr="//we-select[1]" position="after">
+            <we-select t-if="snippet_name == 'dynamic_snippet_estate'"
+                string="Saved Links"
+                data-no-preview="true"
+                data-name="category_opt"
+                data-attribute-name="category">
+                <we-button data-select-data-attribute="-1">All Saved Link</we-button>
+                <!-- the blog list will be generated in js -->
+            </we-select>
+        </xpath>
+    </template>
+
+</harpiya>

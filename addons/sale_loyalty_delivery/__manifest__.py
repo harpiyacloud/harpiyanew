@@ -1,0 +1,15 @@
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+{
+    'name': 'Sale Loyalty - Delivery',
+    'summary': 'Adds free shipping mechanism in sales orders',
+    'description': 'Integrate free shipping in sales orders.',
+    'category': 'Sales/Sales',
+    'data': [
+        'views/loyalty_reward_views.xml',
+    ],
+    'depends': ['sale_loyalty', 'delivery'],
+    'auto_install': True,
+    'author': 'Harpiya Software Technologies, LLC',
+    'license': 'LGPL-3',
+}

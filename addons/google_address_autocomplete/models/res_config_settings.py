@@ -1,0 +1,12 @@
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+from harpiya import fields, models
+
+
+class ResConfigSettings(models.TransientModel):
+    _inherit = 'res.config.settings'
+
+    google_places_api_key = fields.Char(
+        string='Google Places API Key',
+        readonly=False,
+        config_parameter='google_address_autocomplete.google_places_api_key')

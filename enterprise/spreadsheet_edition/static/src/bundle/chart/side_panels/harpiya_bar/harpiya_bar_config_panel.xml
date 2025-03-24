@@ -1,0 +1,17 @@
+<harpiya>
+    <t t-name="spreadsheet_edition.HarpiyaBarChartConfigPanel"
+        t-inherit="spreadsheet_edition.CommonHarpiyaChartConfigPanel"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="//Section[1]" position="before">
+            <Section class="'pt-0'">
+                <Checkbox
+                    name="'stackedBar'"
+                    label="chartTerms.StackedBarChart"
+                    value="props.definition.stacked"
+                    onChange.bind="onUpdateStacked"
+                />
+            </Section>
+        </xpath>
+    </t>
+</harpiya>

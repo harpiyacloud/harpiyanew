@@ -1,0 +1,12 @@
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+{
+    'name': 'Sale Purchase Project',
+    'version': '1.0',
+    'summary': 'Technical Bridge',
+    'author': 'Harpiya Software Technologies, LLC',
+    'license': 'LGPL-3',
+    'category': 'Sales',
+    'depends': ['sale_purchase', 'project_purchase', 'sale_project'],
+    'auto_install': True,
+}

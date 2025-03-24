@@ -1,0 +1,12 @@
+# Part of Harpiya. See LICENSE file for full copyright and licensing details.
+
+from harpiya import models
+
+
+class StockReturnPicking(models.TransientModel):
+    _inherit = 'stock.return.picking'
+
+    def _get_proc_values(self, line):
+        vals = super()._get_proc_values(line)
+        vals['sale_line_id'] = line.move_id.sale_line_id.id
+        return vals

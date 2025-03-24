@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<harpiya>
+    <data>
+        <record id="product.product_category_furniture" model="product.category">
+            <field name="property_cost_method">average</field>
+        </record>
+        <record id="product.product_category_construction" model="product.category">
+            <field name="property_cost_method">fifo</field>
+        </record>
+    </data>
+</harpiya>
