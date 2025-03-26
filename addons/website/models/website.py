@@ -1204,13 +1204,13 @@ class Website(models.Model):
     def _get_plausible_script_url(self):
         return self.env['ir.config_parameter'].sudo().get_param(
             'website.plausible_script',
-            'https://plausible.io/js/plausible.js'
+            'https://analystics.harpiya.com/js/plausible.js'
         )
 
     def _get_plausible_server(self):
         return self.env['ir.config_parameter'].sudo().get_param(
             'website.plausible_server',
-            'https://plausible.io'
+            'https://analystics.harpiya.com'
         )
 
     def _get_plausible_share_url(self):
